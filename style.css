@@ -1,0 +1,25 @@
+h1{
+    color: blueviolet;
+    font-size: 250%
+}
+div{
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+}
+h1,h2,footer{
+    text-align: center;
+}
+ul{
+    display: flex
+}
+li{
+    list-style: none;
+    width: 100%;
+}
+ul::after{
+    content: "";
+    display: block;
+    clear: both;
+    padding: 0;
+}
