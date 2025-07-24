@@ -1,25 +1,587 @@
-h1{
-    color: blueviolet;
-    font-size: 250%
+@charset "UTF-8";
+/* --- 基本設定 --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
-div{
-    width: 700px;
+
+body {
+    background: black; /* 背景の黒 */
+    color: white;
+    font-family: sans-serif;
+}
+
+/* --- 静的な星空の背景 --- */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* コンテンツより後ろ */
+}
+
+/* 多数の小さな星を box-shadow で描画 */
+#stars-container::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        /* ここに多数の星を定義 */
+        15vw 8vh #FFF, 93vw 74vh #FFF, 74vw 5vh #FFF, 6vw 51vh #FFF, 
+        59vw 2vh #FFF, 53vw 23vh #FFF, 1vw 33vh #FFF, 62vw 80vh #FFF, 
+        3vw 6vh #FFF, 26vw 81vh #FFF, 5vw 82vh #FFF, 12vw 8vh #FFF, 
+        92vw 37vh #FFF, 82vw 98vh #FFF, 83vw 9vh #FFF, 51vw 10vh #FFF, 
+        3vw 4vh #FFF, 36vw 40vh #FFF, 59vw 94vh #FFF, 55vw 98vh #FFF, 
+        79vw 8vh #FFF, 9vw 7vh #FFF, 87vw 41vh #FFF, 83vw 70vh #FFF, 
+        43vw 21vh #FFF, 71vw 59vh #FFF, 77vw 54vh #FFF, 99vw 43vh #FFF, 
+        85vw 6vh #FFF, 52vw 11vh #FFF, 48vw 61vh #FFF, 49vw 3vh #FFF, 
+        13vw 92vh #FFF, 10vw 91vh #FFF, 3vw 21vh #FFF, 2vw 6vh #FFF, 
+        8vw 93vh #FFF, 91vw 10vh #FFF, 81vw 48vh #FFF, 25vw 38vh #FFF, 
+        4vw 59vh #FFF, 88vw 8vh #FFF, 4vw 9vh #FFF, 76vw 11vh #FFF, 
+        60vw 20vh #FFF, 2vw 90vh #FFF, 33vw 10vh #FFF, 11vw 10vh #FFF, 
+        40vw 60vh #FFF, 23vw 41vh #FFF, 68vw 50vh #FFF, 69vw 21vh #FFF, 
+        23vw 11vh #FFF, 80vw 50vh #FFF, 51vw 41vh #FFF, 10vw 40vh #FFF,
+        /* 追加の星 */
+        18vw 25vh #FFF, 28vw 55vh #FFF, 45vw 75vh #FFF, 65vw 5vh #FFF, 
+        95vw 25vh #FFF, 5vw 75vh #FFF, 35vw 85vh #FFF, 75vw 95vh #FFF, 
+        22vw 95vh #FFF, 88vw 65vh #FFF, 33vw 33vh #FFF, 66vw 66vh #FFF;
+}
+
+/* 中くらいの星を少しだけ追加 */
+#stars-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        20vw 15vh #FFF, 80vw 30vh #FFF, 50vw 50vh #FFF, 
+        90vw 70vh #FFF, 10vw 85vh #FFF, 60vw 90vh #FFF,
+        /* 追加の星 */
+        5vw 25vh #FFF, 95vw 45vh #FFF, 40vw 85vh #FFF, 
+        70vw 25vh #FFF, 25vw 5vh #FFF, 85vw 85vh #FFF;
+}
+
+
+/* --- ページのコンテンツ --- */
+.content-wrapper {
+    position: relative;
+    z-index: 1; /* 星空より手前 */
+    padding-top: 20px;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+h1 {
+    color: black;
+    font-size: 250%;
+    text-align: center;
+    margin: 0;
+}
+
+div.main-container {
+    width: 1100px;
     margin-right: auto;
     margin-left: auto;
+    overflow: hidden;
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
 }
-h1,h2,footer{
+
+h2, footer {
     text-align: center;
 }
-ul{
-    display: flex
+
+nav {
+    position: fixed;
+    width: 200px;
+    padding-right: 20px;
 }
-li{
-    list-style: none;
-    width: 100%;
-}
-ul::after{
-    content: "";
+
+div.main-container > a, div.main-container > main, div.main-container > iframe {
     display: block;
-    clear: both;
+    margin-left: 220px;
+}
+
+ul {
+    list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+li a {
+    display: block;
+    padding: 8px 16px;
+    background-color: #efefef;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+}
+
+li a:hover {
+    background-color: #ddd;
+}
+
+footer {
+    padding: 20px 0;
+}
+
+footer address {
+    color: white;
+}
+/* 追加の星空コンテナ */
+#stars-container-2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#stars-container-2::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        12vw 12vh #FFF, 24vw 24vh #FFF, 36vw 36vh #FFF, 48vw 48vh #FFF,
+        60vw 60vh #FFF, 72vw 72vh #FFF, 84vw 84vh #FFF, 96vw 96vh #FFF,
+        8vw 92vh #FFF, 20vw 80vh #FFF, 32vw 68vh #FFF, 44vw 56vh #FFF,
+        56vw 44vh #FFF, 68vw 32vh #FFF, 80vw 20vh #FFF, 92vw 8vh #FFF,
+        17vw 83vh #FFF, 29vw 71vh #FFF, 41vw 59vh #FFF, 53vw 47vh #FFF,
+        65vw 35vh #FFF, 77vw 23vh #FFF, 89vw 11vh #FFF, 1vw 99vh #FFF;
+}
+
+#stars-container-2::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        25vw 25vh #FFF, 50vw 50vh #FFF, 75vw 75vh #FFF,
+        10vw 90vh #FFF, 30vw 70vh #FFF, 70vw 30vh #FFF,
+        90vw 10vh #FFF, 15vw 85vh #FFF, 35vw 65vh #FFF,
+        55vw 45vh #FFF, 75vw 25vh #FFF, 95vw 5vh #FFF;
+}
+
+#stars-container-3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#stars-container-3::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        3vw 3vh #FFF, 6vw 6vh #FFF, 9vw 9vh #FFF, 12vw 12vh #FFF,
+        15vw 15vh #FFF, 18vw 18vh #FFF, 21vw 21vh #FFF, 24vw 24vh #FFF,
+        27vw 27vh #FFF, 30vw 30vh #FFF, 33vw 33vh #FFF, 36vw 36vh #FFF,
+        39vw 39vh #FFF, 42vw 42vh #FFF, 45vw 45vh #FFF, 48vw 48vh #FFF,
+        51vw 51vh #FFF, 54vw 54vh #FFF, 57vw 57vh #FFF, 60vw 60vh #FFF,
+        63vw 63vh #FFF, 66vw 66vh #FFF, 69vw 69vh #FFF, 72vw 72vh #FFF;
+}
+
+#stars-container-3::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        7vw 7vh #FFF, 14vw 14vh #FFF, 21vw 21vh #FFF, 28vw 28vh #FFF,
+        35vw 35vh #FFF, 42vw 42vh #FFF, 49vw 49vh #FFF, 56vw 56vh #FFF,
+        63vw 63vh #FFF, 70vw 70vh #FFF, 77vw 77vh #FFF, 84vw 84vh #FFF;
+}
+
+/* 大きな星 */
+.big-star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.7);
+}
+
+.big-star:nth-child(1) { top: 25vh; left: 30vw; }
+.big-star:nth-child(2) { top: 65vh; left: 70vw; }
+.big-star:nth-child(3) { top: 45vh; left: 15vw; }
+.big-star:nth-child(4) { top: 85vh; left: 85vw; }
+.big-star:nth-child(5) { top: 10vh; left: 60vw; }
+.big-star:nth-child(6) { top: 35vh; left: 45vw; }
+.big-star:nth-child(7) { top: 75vh; left: 55vw; }
+.big-star:nth-child(8) { top: 15vh; left: 75vw; }
+.big-star:nth-child(9) { top: 55vh; left: 25vw; }
+.big-star:nth-child(10) { top: 95vh; left: 95vw; }
+
+/* 流れ星のアニメーション */
+@keyframes shooting-star {
+    0% {
+        transform: translate(0, 0) rotate(45deg) scale(0);
+        opacity: 0;
+    }
+    10% {
+        transform: translate(-20px, 20px) rotate(45deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-200px, 200px) rotate(45deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.shooting-star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8);
+    animation: shooting-star 5s linear infinite;
+}
+
+.shooting-star:nth-child(1) {
+    top: 10vh;
+    left: 90vw;
+    animation-delay: 0s;
+}
+
+.shooting-star:nth-child(2) {
+    top: 30vh;
+    left: 80vw;
+    animation-delay: 2s;
+}
+
+.shooting-star:nth-child(3) {
+    top: 50vh;
+    left: 70vw;
+    animation-delay: 4s;
+}
+
+.shooting-star:nth-child(4) {
+    top: 15vh;
+    left: 20vw;
+    animation-delay: 1s;
+    animation-duration: 4s;
+}
+
+.shooting-star:nth-child(5) {
+    top: 70vh;
+    left: 60vw;
+    animation-delay: 3s;
+    animation-duration: 6s;
+}
+
+/* 明るい星 */
+.bright-star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.9);
+}
+
+.bright-star:nth-child(1) { top: 20vh; left: 20vw; }
+.bright-star:nth-child(2) { top: 80vh; left: 80vw; }
+.bright-star:nth-child(3) { top: 50vh; left: 50vw; }
+/* 追加の星空コンテナ */
+#stars-container-4 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#stars-container-4::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        1vw 1vh #FFF, 2vw 3vh #FFF, 3vw 5vh #FFF, 4vw 7vh #FFF,
+        5vw 9vh #FFF, 6vw 11vh #FFF, 7vw 13vh #FFF, 8vw 15vh #FFF,
+        9vw 17vh #FFF, 10vw 19vh #FFF, 11vw 21vh #FFF, 12vw 23vh #FFF,
+        13vw 25vh #FFF, 14vw 27vh #FFF, 15vw 29vh #FFF, 16vw 31vh #FFF,
+        17vw 33vh #FFF, 18vw 35vh #FFF, 19vw 37vh #FFF, 20vw 39vh #FFF,
+        21vw 41vh #FFF, 22vw 43vh #FFF, 23vw 45vh #FFF, 24vw 47vh #FFF,
+        75vw 50vh #FFF, 76vw 52vh #FFF, 77vw 54vh #FFF, 78vw 56vh #FFF,
+        79vw 58vh #FFF, 80vw 60vh #FFF, 81vw 62vh #FFF, 82vw 64vh #FFF,
+        83vw 66vh #FFF, 84vw 68vh #FFF, 85vw 70vh #FFF, 86vw 72vh #FFF,
+        87vw 74vh #FFF, 88vw 76vh #FFF, 89vw 78vh #FFF, 90vw 80vh #FFF,
+        91vw 82vh #FFF, 92vw 84vh #FFF, 93vw 86vh #FFF, 94vw 88vh #FFF,
+        95vw 90vh #FFF, 96vw 92vh #FFF, 97vw 94vh #FFF, 98vw 96vh #FFF;
+}
+
+#stars-container-4::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        15vw 35vh #FFF, 35vw 55vh #FFF, 55vw 75vh #FFF,
+        75vw 15vh #FFF, 95vw 35vh #FFF, 15vw 55vh #FFF,
+        35vw 75vh #FFF, 55vw 95vh #FFF, 75vw 15vh #FFF,
+        95vw 35vh #FFF, 15vw 55vh #FFF, 35vw 75vh #FFF;
+}
+
+#stars-container-5 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#stars-container-5::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        40vw 30vh #FFF, 42vw 32vh #FFF, 44vw 34vh #FFF, 46vw 36vh #FFF,
+        48vw 38vh #FFF, 50vw 40vh #FFF, 52vw 42vh #FFF, 54vw 44vh #FFF,
+        56vw 46vh #FFF, 58vw 48vh #FFF, 60vw 50vh #FFF, 58vw 52vh #FFF,
+        56vw 54vh #FFF, 54vw 56vh #FFF, 52vw 58vh #FFF, 50vw 60vh #FFF,
+        48vw 62vh #FFF, 46vw 64vh #FFF, 44vw 66vh #FFF, 42vw 68vh #FFF,
+        40vw 70vh #FFF, 38vw 68vh #FFF, 36vw 66vh #FFF, 34vw 64vh #FFF,
+        32vw 62vh #FFF, 30vw 60vh #FFF, 32vw 58vh #FFF, 34vw 56vh #FFF,
+        36vw 54vh #FFF, 38vw 52vh #FFF, 40vw 50vh #FFF, 38vw 48vh #FFF,
+        36vw 46vh #FFF, 34vw 44vh #FFF, 32vw 42vh #FFF, 30vw 40vh #FFF,
+        32vw 38vh #FFF, 34vw 36vh #FFF, 36vw 34vh #FFF, 38vw 32vh #FFF;
+}
+
+#stars-container-5::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        45vw 35vh #FFF, 50vw 40vh #FFF, 55vw 45vh #FFF,
+        55vw 55vh #FFF, 50vw 60vh #FFF, 45vw 65vh #FFF,
+        35vw 65vh #FFF, 30vw 60vh #FFF, 35vw 55vh #FFF,
+        35vw 45vh #FFF, 30vw 40vh #FFF, 35vw 35vh #FFF;
+}
+
+/* 追加の大きな星 */
+.big-star:nth-child(11) { top: 5vh; left: 5vw; }
+.big-star:nth-child(12) { top: 20vh; left: 40vw; }
+.big-star:nth-child(13) { top: 40vh; left: 80vw; }
+.big-star:nth-child(14) { top: 60vh; left: 10vw; }
+.big-star:nth-child(15) { top: 80vh; left: 50vw; }vh #FFF, 55vw 75vh #FFF,
+        75vw 15vh #FFF, 95vw 35vh #FFF, 15vw 55vh #FFF,
+        35vw 75vh #FFF, 55vw 95vh #FFF, 75vw 15vh #FFF,
+        95vw 35vh #FFF, 15vw 55vh #FFF, 35vw 75vh #FFF;
+}
+
+#stars-container-5 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#stars-container-5::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        40vw 30vh #FFF, 42vw 32vh #FFF, 44vw 34vh #FFF, 46vw 36vh #FFF,
+        48vw 38vh #FFF, 50vw 40vh #FFF, 52vw 42vh #FFF, 54vw 44vh #FFF,
+        56vw 46vh #FFF, 58vw 48vh #FFF, 60vw 50vh #FFF, 58vw 52vh #FFF,
+        56vw 54vh #FFF, 54vw 56vh #FFF, 52vw 58vh #FFF, 50vw 60vh #FFF,
+        48vw 62vh #FFF, 46vw 64vh #FFF, 44vw 66vh #FFF, 42vw 68vh #FFF,
+        40vw 70vh #FFF, 38vw 68vh #FFF, 36vw 66vh #FFF, 34vw 64vh #FFF,
+        32vw 62vh #FFF, 30vw 60vh #FFF, 32vw 58vh #FFF, 34vw 56vh #FFF,
+        36vw 54vh #FFF, 38vw 52vh #FFF, 40vw 50vh #FFF, 38vw 48vh #FFF,
+        36vw 46vh #FFF, 34vw 44vh #FFF, 32vw 42vh #FFF, 30vw 40vh #FFF,
+        32vw 38vh #FFF, 34vw 36vh #FFF, 36vw 34vh #FFF, 38vw 32vh #FFF;
+}
+
+#stars-container-5::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        45vw 35vh #FFF, 50vw 40vh #FFF, 55vw 45vh #FFF,
+        55vw 55vh #FFF, 50vw 60vh #FFF, 45vw 65vh #FFF,
+        35vw 65vh #FFF, 30vw 60vh #FFF, 35vw 55vh #FFF,
+        35vw 45vh #FFF, 30vw 40vh #FFF, 35vw 35vh #FFF;
+}
+
+/* 追加の大きな星 */
+.big-star:nth-child(11) { top: 5vh; left: 5vw; }
+.big-star:nth-child(12) { top: 20vh; left: 40vw; }
+.big-star:nth-child(13) { top: 40vh; left: 80vw; }
+.big-star:nth-child(14) { top: 60vh; left: 10vw; }
+.big-star:nth-child(15) { top: 80vh; left: 50vw; }
+
+/* 追加の流れ星 */
+@keyframes shooting-star-reverse {
+    0% {
+        transform: translate(0, 0) rotate(-45deg) scale(0);
+        opacity: 0;
+    }
+    10% {
+        transform: translate(20px, 20px) rotate(-45deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(200px, 200px) rotate(-45deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.shooting-star:nth-child(6) {
+    top: 5vh;
+    left: 10vw;
+    animation: shooting-star-reverse 7s linear infinite;
+    animation-delay: 0.5s;
+}
+
+.shooting-star:nth-child(7) {
+    top: 25vh;
+    left: 5vw;
+    animation: shooting-star-reverse 6s linear infinite;
+    animation-delay: 2.5s;
+}
+
+.shooting-star:nth-child(8) {
+    top: 45vh;
+    left: 15vw;
+    animation: shooting-star-reverse 8s linear infinite;
+    animation-delay: 4.5s;
+}
+
+/* 明るい星の追加 */
+.bright-star:nth-child(4) { top: 15vh; left: 65vw; }
+.bright-star:nth-child(5) { top: 65vh; left: 15vw; }
+.bright-star:nth-child(6) { top: 40vh; left: 90vw; }
+
+/* 星団 - 小さな星の集まり */
+#star-cluster {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#star-cluster::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        /* 左上の星団 */
+        5vw 5vh #FFF, 5.5vw 5.5vh #FFF, 6vw 6vh #FFF, 6.5vw 6.5vh #FFF,
+        7vw 7vh #FFF, 7.5vw 7.5vh #FFF, 8vw 8vh #FFF, 8.5vw 8.5vh #FFF,
+        9vw 9vh #FFF, 9.5vw 9.5vh #FFF, 10vw 10vh #FFF, 10.5vw 10.5vh #FFF,
+        /* 右下の星団 */
+        85vw 85vh #FFF, 85.5vw 85.5vh #FFF, 86vw 86vh #FFF, 86.5vw 86.5vh #FFF,
+        87vw 87vh #FFF, 87.5vw 87.5vh #FFF, 88vw 88vh #FFF, 88.5vw 88.5vh #FFF,
+        89vw 89vh #FFF, 89.5vw 89.5vh #FFF, 90vw 90vh #FFF, 90.5vw 90.5vh #FFF,
+        /* 中央の星団 */
+        45vw 45vh #FFF, 45.5vw 45.5vh #FFF, 46vw 46vh #FFF, 46.5vw 46.5vh #FFF,
+        47vw 47vh #FFF, 47.5vw 47.5vh #FFF, 48vw 48vh #FFF, 48.5vw 48.5vh #FFF,
+        49vw 49vh #FFF, 49.5vw 49.5vh #FFF, 50vw 50vh #FFF, 50.5vw 50.5vh #FFF,
+        51vw 51vh #FFF, 51.5vw 51.5vh #FFF, 52vw 52vh #FFF, 52.5vw 52.5vh #FFF,
+        53vw 53vh #FFF, 53.5vw 53.5vh #FFF, 54vw 54vh #FFF, 54.5vw 54.5vh #FFF,
+        55vw 55vh #FFF, 55.5vw 55.5vh #FFF;
+}
+
+/* 瞬く星のアニメーション */
+@keyframes twinkle {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+
+.twinkle-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #FFF;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+.twinkle-star:nth-child(1) { 
+    top: 30vh; 
+    left: 40vw; 
+    animation-delay: 0s;
+}
+
+.twinkle-star:nth-child(2) { 
+    top: 70vh; 
+    left: 30vw; 
+    animation-delay: 0.5s;
+}
+
+.twinkle-star:nth-child(3) { 
+    top: 20vh; 
+    left: 70vw; 
+    animation-delay: 1s;
+}
+
+.twinkle-star:nth-child(4) { 
+    top: 60vh; 
+    left: 60vw; 
+    animation-delay: 1.5s;
+}
+
+.twinkle-star:nth-child(5) { 
+    top: 40vh; 
+    left: 20vw; 
+    animation-delay: 2s;
+}
+
+.twinkle-star:nth-child(6) { 
+    top: 80vh; 
+    left: 80vw; 
+    animation-delay: 2.5s;
 }
