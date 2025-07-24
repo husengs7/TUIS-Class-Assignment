@@ -81,5 +81,39 @@
             </address>
         </footer>
     </div>
+    
+    <!-- Cookie同意バナー -->
+    <div id="cookie-banner">
+        <p>このサイトでは、ユーザー体験を向上させるためにCookieを使用しています。継続することでCookieの使用に同意したものとみなします。</p>
+        <button onclick="acceptCookies()">同意する</button>
+        <button class="decline-btn" onclick="declineCookies()">拒否する</button>
+    </div>
+    
+    <script>
+        // Cookie同意状態をチェック
+        function checkCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            if (consent) {
+                document.getElementById('cookie-banner').classList.add('cookie-hidden');
+            }
+        }
+        
+        // Cookieを同意する
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookie-banner').classList.add('cookie-hidden');
+        }
+        
+        // Cookieを拒否する
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookie-banner').classList.add('cookie-hidden');
+        }
+        
+        // ページ読み込み時にチェック
+        window.onload = function() {
+            checkCookieConsent();
+        };
+    </script>
 </body>
-    </html>
+</html>

@@ -534,3 +534,48 @@ footer address {
     left: 80vw; 
     animation-delay: 2.5s;
 }
+/* Cookie同意バナー */
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    z-index: 1000;
+    border-top: 2px solid #333;
+}
+
+#cookie-banner p {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+}
+
+#cookie-banner button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#cookie-banner button:hover {
+    background-color: #0056b3;
+}
+
+#cookie-banner .decline-btn {
+    background-color: #6c757d;
+}
+
+#cookie-banner .decline-btn:hover {
+    background-color: #545b62;
+}
+
+.cookie-hidden {
+    display: none;
+}
